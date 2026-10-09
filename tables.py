@@ -1,7 +1,7 @@
 import uuid, enum, datetime
 from sqlalchemy import  func, DateTime, BigInteger, VARCHAR, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from app.database import Base
+from database import Base
 
 
 
@@ -38,7 +38,8 @@ class User(Base):
     created_at : Mapped[datetime.datetime] = mapped_column(DateTime(timezone=True),server_default=func.now())
     account : Mapped[list["Account"]] = relationship(back_populates="user")
     transaction : Mapped[list["Transaction"]] = relationship(back_populates="user")
-
+    def __repr__(self):
+        return f"User(user_id={self.user_id}, first_name='{self.first_name}', last_name='{self.last_name}',email_address='{self.email_address}', email_address='{self.email_address}', password_hash='{self.password_hash}')"
 class Account(Base):
     __tablename__ = "accounts"
     account_id : Mapped[uuid.UUID] = mapped_column(primary_key=True, server_default=func.uuidv7())
