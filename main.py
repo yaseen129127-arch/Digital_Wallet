@@ -4,12 +4,14 @@ from user import rejester, login
 def menu_wallet(user):
     """The main menu inside the wallet"""
     
-    print(f"wellcome {user.first_name}{user.last_name}\n")
+    print(f"Wellcome {user.first_name} {user.last_name}\n")
     print("____________________________________\n")
-    print("1. Vaultix Wallet")
-    print("2. Balance")
-    print("3. Send Money")
-    print("4. Cash")
+    print(" Vaultix Wallet")
+    print("____________________________________\n")
+    print("1. Charge Vaultiix")
+    print("2. Send Money")
+    print("3. Cash Out")
+    print("4. Vaultix Report")
     print("5. Logout")
 
 
