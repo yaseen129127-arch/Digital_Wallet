@@ -1,4 +1,5 @@
-from user import rejester, login
+from account import rejester, login
+from services import charge
 
 
 def menu_wallet(user):
@@ -13,6 +14,12 @@ def menu_wallet(user):
     print("3. Cash Out")
     print("4. Vaultix Report")
     print("5. Logout")
+    while True:
+        choose = input("\nChoose an option: ")
+        if choose =="1" :
+            charge(user)
+        else :
+            return
 
 
 
