@@ -54,7 +54,6 @@ class Transaction(Base):
     __tablename__ = "transactions"
     transaction_id : Mapped[uuid.UUID] = mapped_column(primary_key=True, server_default=func.uuidv7())
     initiated_by_user_id : Mapped[uuid.UUID] = mapped_column(ForeignKey("users.user_id"))
-    idempotency_key : Mapped[uuid.UUID]
     transaction_type : Mapped[Ttype]
     status : Mapped[Tstatus]
     currency : Mapped[Currency]

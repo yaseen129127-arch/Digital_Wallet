@@ -24,21 +24,27 @@ def rejester():
     with Session (engine) as session :
         existing_phone = session.scalar(select(User).where (User.phone_number == phone_number))
         if existing_phone :
-            print("/n Email Address is Already Used")
+            print("/n Phone Number is Already Used")
             return
     
-    new_user = User(first_name =first_name, last_name = last_name, email_address = email_address, phone_number =phone_number, password_hash= password_hash )
+    new_user = User(
+                    first_name =first_name,
+                        last_name = last_name, 
+                            email_address = email_address, 
+                                phone_number =phone_number, 
+                                    password_hash= password_hash
+                                    )
     session.add(new_user)   
     session.flush()
     
-#create a currency wallet for the new_user in the same time with creating the new account.    
+#create a currency wallet for the new_user in the same time with creating the new account.   
     usd_account = Account(user_id=new_user.user_id,currency=Currency.USD,account_status=Astatus.ACTIVE)
     eur_account = Account(user_id=new_user.user_id,currency=Currency.EUR,account_status=Astatus.ACTIVE)
 #   session.add(usd_account)
 #   session.add(eur_account)
     session.add_all([usd_account, eur_account])
     session.commit()
-
+ 
 print("\nAccount Created Successfully")
 print("USD and EUR wallets created successfully")
 
