@@ -1,5 +1,5 @@
 from account import rejester, login
-from services import charge
+from services import charge,transfer
 
 
 def menu_wallet(user):
@@ -18,8 +18,10 @@ def menu_wallet(user):
         choose = input("\nChoose an option: ")
         if choose =="1" :
             charge(user)
+        if choose == "2" :
+            transfer(user)
         else :
-            return
+            return main()
 
 
 
@@ -27,7 +29,7 @@ def menu_wallet(user):
 def main():
     """The main menu for login to wallet"""
     
-    print("\nWelcome To Vaultix Wallet")
+    print("\nWelcome To Wallet")
     print("______________________________\n")
     print("1. Create Account")
     print("2. Login")
