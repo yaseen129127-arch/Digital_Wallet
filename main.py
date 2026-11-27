@@ -1,48 +1,34 @@
-from user import rejester, login
-
-
-def menu_wallet(user):
-    """The main menu inside the wallet"""
-    
-    print(f"Wellcome {user.first_name} {user.last_name}\n")
-    print("____________________________________\n")
-    print(" Vaultix Wallet")
-    print("____________________________________\n")
-    print("1. Charge Vaultiix")
-    print("2. Send Money")
-    print("3. Cash Out")
-    print("4. Vaultix Report")
-    print("5. Logout")
+import asyncio
+from services import rejister, login, menu_wallet
+from models import User
+# from sqlalchemy.orm import Session
+# from database import SessionLocal
+# from sqlalchemy import select
+# from schemas import RejisterRequest
+from pydantic import ValidationError
 
 
 
 
-def main():
+async def menu():
     """The main menu for login to wallet"""
-    
-    print("\nWelcome To Vaultix Wallet")
+    print("\nWelcome To VoLtiX Wallet")
     print("______________________________\n")
     print("1. Create Account")
     print("2. Login")
-    print("3. Exit")
-    while True:
-    
-        choice = input("\nChoose an option: ")
-
-        if choice == "1":
-            rejester()
-            
-        elif choice == "2":
-            user = login()
-            if user is not None:
-                menu_wallet(user)
-
-        elif choice == "3":
-            print("\nGoodbye!")
-            break
-
-        else:
-            print("\nInvalid choice. Please try again.")
-            #return
-main()
+    choice=input("\nChoose an option: \n")
+    if choice == "1":
+        try:
+            await rejister()     
+        except ValidationError as e:
+            print(f"\nRegistration failed: {e}")
+            return await menu()
+    elif choice == "2":
+        user_id = await login()
+        if user_id is not None:
+            await menu_wallet(user_id)
+    else:
+        print("\nInvalid choice. Please Choose A Number From The Menu \n.")
+if __name__ == "__main__":
+    asyncio.run(menu())
 
